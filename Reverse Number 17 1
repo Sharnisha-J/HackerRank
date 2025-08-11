@@ -1,0 +1,26 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int d=(int)Math.log10(n)+1;
+        int h=(d+1)/2;
+        int p=(int)Math.pow(10,h);
+        int fh=n/p;
+        int lh=n%p;
+        int revh=0;
+        while(lh!=0){
+            revh=revh*10+(lh%10);
+            lh/=10;
+        }
+        int res=(int)(fh*Math.pow(10,h))+revh;
+        System.out.println(res);
+    }
+}
