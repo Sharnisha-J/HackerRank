@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[] height=new int[n];
+        for(int i=0;i<n;i++){
+            height[i]=sc.nextInt();
+        }
+        if(n==0){
+            System.out.println(0);
+            return;
+        }
+        int[] bottle=new int[n];
+        Arrays.fill(bottle,1);
+        for(int i=1;i<n;i++){
+            if(height[i]>height[i-1]){
+                bottle[i]=bottle[i-1]+1;
+            }
+        }
+        for(int i=n-2;i>=0;i--){
+            if(height[i]>height[i+1]){
+                bottle[i]=Math.max(bottle[i],bottle[i+1]+1);
+            }
+        }
+        int total=0;
+        for(int i=0;i<bottle.length;i++){
+            total+=bottle[i];
+        }
+        System.out.println(total);
+    }
+}
