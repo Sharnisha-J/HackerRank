@@ -1,0 +1,45 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        char[] arr=new char[n];
+        int[] pol=new int[n];
+        int[] thi=new int[n];
+        int p=0,t=0;
+        for(int i=0;i<n;i++){
+            arr[i]=sc.next().charAt(0);
+            if(arr[i]=='P'){
+                pol[p]=i;
+                p++;
+            }
+            if(arr[i]=='T'){
+                thi[t]=i;
+                t++;
+            }
+        }
+        int k=sc.nextInt();
+        int i=0,j=0,count=0;
+        while(i<p && j<t){
+            if(Math.abs(pol[i]-thi[j])<=k){
+                count++;
+                i++;
+                j++;
+            }
+            else if(pol[i]<thi[j]){
+                i++;
+            }
+            else{
+                j++;
+            }
+        }
+        System.out.println("Maximum thieves caught: "+count);
+    }
+}
