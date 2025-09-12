@@ -1,0 +1,45 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[] dl=new int[n];
+        int[] p=new int[n];
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<n;i++){
+            dl[i]=sc.nextInt();
+            p[i]=sc.nextInt();
+            max=Math.max(dl[i],max);
+        }
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                if(p[i]<p[j]){
+                    int t=p[j];
+                    p[j]=p[i];
+                    p[i]=t;
+                    t=dl[j];
+                    dl[j]=dl[i];
+                    dl[i]=t;
+                }
+            }
+        }
+        int[] ans=new int[max+1];
+        for(int i=0;i<n;i++){
+            for(int j=dl[i];j>=1;j--){
+                if(ans[j]==0){
+                    ans[j]=p[i];
+                    break;
+                }
+            }
+        }
+        int res=0;
+        for(int i=0;i<max+1;i++){
+            res+=ans[i];
+        }
+        System.out.println(res);
+    }
+}
