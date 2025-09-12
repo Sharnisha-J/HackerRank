@@ -1,0 +1,52 @@
+import java.io.*;
+import java.util.*;
+class Node{
+    int data;
+    Node next;
+    Node(int d){
+        data=d;
+        next=null;
+    }
+}
+class SingleLinked{
+    Node head=null;
+    Node old=null;
+    void ins(int d,int count){
+        if(count%2==0){
+            Node newnode=new Node(d);
+            if(head==null){
+                head=newnode;
+                old=newnode;
+            }
+            else{
+                old.next=newnode;
+                old=newnode;
+            }
+        }
+        else{
+            return;
+        }
+    }
+    void dis(){
+        Node temp=head;
+        while(temp!=null){
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+    }
+}
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        SingleLinked ll=new SingleLinked();
+        int count=0;
+        while(sc.hasNextInt()){
+            int d=sc.nextInt();
+            ll.ins(d,count);
+            count++;
+        }
+        ll.dis();
+    }
+}
