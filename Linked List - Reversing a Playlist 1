@@ -1,0 +1,58 @@
+import java.io.*;
+import java.util.*;
+class Node{
+    String data;
+    Node next;
+    Node(String s){
+        data=s;
+        next=null;
+    }
+}
+class SingleLinked{
+    Node head=null;
+    Node old=null;
+    void ins(String s){
+        Node newnode=new Node(s);
+        if(head==null){
+            head=newnode;
+            old=newnode;
+        }
+        else{
+            old.next=newnode;
+            old=newnode;
+        }
+    }
+    void rev(){
+        Node temp=head;
+        Node revstart=null;
+        Node revlast=null;
+        while(temp!=null){
+            revlast=revstart;
+            revstart=temp;
+            temp=temp.next;
+            revstart.next=revlast;
+        }
+        head=revstart;
+    }
+    void dis(){
+        Node temp=head;
+        while(temp!=null){
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+    }
+}
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        SingleLinked ll=new SingleLinked();
+        while(sc.hasNext()){
+            String s=sc.next();
+            ll.ins(s);
+        }
+        ll.rev();
+        ll.dis();
+    }
+}
