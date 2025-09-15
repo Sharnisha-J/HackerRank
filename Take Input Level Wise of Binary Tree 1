@@ -1,0 +1,86 @@
+import java.io.*;
+import java.util.*;
+class Node{
+    int data;
+    Node left;
+    Node right;
+    Node(int d){
+        data=d;
+        left=null;
+        right=null;
+    }
+}
+public class Solution {
+    static void disInorder(Node root){
+        if(root==null){
+            return;
+        }
+        disInorder(root.left);
+        System.out.print(root.data+" ");
+        disInorder(root.right);
+    }
+    static void disPreorder(Node root){
+        if(root==null){
+            return;
+        }
+        System.out.print(root.data+" ");
+        disPreorder(root.left);
+        disPreorder(root.right);
+    }
+    static void disPostorder(Node root){
+        if(root==null){
+            return;
+        }
+        disPostorder(root.left);
+        disPostorder(root.right);
+        System.out.print(root.data+" ");
+    }
+    static void disLevelorder(Node root){
+        if(root==null){
+            return;
+        }
+        Queue<Node> queue=new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            Node temp=queue.poll();
+            System.out.print(temp.data+" ");
+            if(temp.left!=null){
+                queue.add(temp.left);
+            }
+            if(temp.right!=null){
+                queue.add(temp.right);
+            }
+        }
+    }
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        Queue<Node> q=new LinkedList<>();
+        int d=sc.nextInt();
+        Node newnode=new Node(d);
+        Node root=newnode;
+        q.add(newnode);
+        while(!q.isEmpty()){
+            Node temp=q.poll();
+            d=sc.nextInt();
+            if(d!=-1){
+                newnode=new Node(d);
+                temp.left=newnode;
+                q.add(newnode);
+            }
+            d=sc.nextInt();
+            if(d!=-1){
+                newnode=new Node(d);
+                temp.right=newnode;
+                q.add(newnode);
+            }
+        }
+        disInorder(root);
+        System.out.println();
+        disPreorder(root);
+        System.out.println();
+        disPostorder(root);
+        System.out.println();
+        disLevelorder(root);
+    }
+}
