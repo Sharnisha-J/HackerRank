@@ -1,0 +1,45 @@
+import java.io.*;
+import java.util.*;
+class Node{
+    int data;
+    Node left;
+    Node right;
+    Node(int d){
+        data=d;
+        left=null;
+        right=null;
+    }
+}
+public class Solution {
+    static int countNode(Node root){
+        if(root==null){
+            return 0;
+        }
+        return countNode(root.right)+1+countNode(root.left);
+    }
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        Queue<Node> queue=new LinkedList<>();
+        int d=sc.nextInt();
+        Node newnode=new Node(d);
+        Node root=newnode;
+        queue.add(newnode);
+        while(!queue.isEmpty()){
+            Node temp=queue.poll();
+            d=sc.nextInt();
+            if(d!=-1){
+                newnode=new Node(d);
+                temp.left=newnode;
+                queue.add(newnode);
+            }
+            d=sc.nextInt();
+            if(d!=-1){
+                newnode=new Node(d);
+                temp.right=newnode;
+                queue.add(newnode);
+            }
+        }
+        System.out.println(countNode(root));
+    }
+}
