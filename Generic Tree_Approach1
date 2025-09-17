@@ -1,0 +1,64 @@
+import java.io.*;
+import java.util.*;
+class Node{
+    int data;
+    ArrayList<Node> next;
+    Node(int d){
+        data=d;
+        next=new ArrayList<>();
+    }
+}
+public class Solution {
+    static int sumTree(Node root){
+        if(root==null){
+            return 0;
+        }
+        int sum=0;
+        Queue<Node> queue=new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            Node temp=queue.poll();
+            sum+=temp.data;
+            for(Node t:temp.next){
+                queue.add(t);
+            }
+        }
+        return sum;
+    }
+    static void disTree(Node root){
+        if(root==null){
+            return;
+        }
+        Queue<Node> queue=new LinkedList<>();
+        queue.add(root);
+        while(!queue.isEmpty()){
+            Node temp=queue.poll();
+            System.out.print(temp.data+" ");
+            for(Node t:temp.next){
+                queue.add(t);
+            }
+        }
+    }
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        Queue<Node> queue=new LinkedList<>();
+        int d=sc.nextInt();
+        Node newnode=new Node(d);
+        Node root=newnode;
+        queue.add(root);
+        while(!queue.isEmpty()){
+            Node temp=queue.poll();
+            int n=sc.nextInt();
+            for(int i=0;i<n;i++){
+                d=sc.nextInt();
+                newnode=new Node(d);
+                temp.next.add(newnode);
+                queue.add(newnode);
+            }
+        }
+        System.out.print(sumTree(root));
+        System.out.println();
+        disTree(root);
+    }
+}
