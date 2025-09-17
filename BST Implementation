@@ -1,0 +1,123 @@
+import java.io.*;
+import java.util.*;
+class Node{
+    int data;
+    Node left;
+    Node right;
+    Node(int d){
+        data=d;
+    }
+}
+class BST{
+    Node root;
+    Node insert(Node root,int data) {
+        if(root==null){
+            return new Node(data);
+        }
+        if(data<=root.data) {
+            root.left=insert(root.left,data);
+        }
+        else{
+            root.right=insert(root.right,data);
+        }
+        return root;
+    }
+    void insert(int data){
+        root=insert(root,data);
+    }
+    boolean search(Node root,int data){
+        if(root==null){
+            return false;
+        }
+        if(root.data==data){
+            return true;
+        }
+        if(data<root.data){
+            return search(root.left,data);
+        }
+        return search(root.right,data);
+    }
+    boolean search(int data){
+        return search(root,data);
+    }
+    Node delete(Node root,int data) {
+        if(root==null){
+            return null;
+        }
+        if(data<root.data){
+            root.left=delete(root.left,data);
+        }
+        else if(data>root.data){
+            root.right=delete(root.right,data);
+        }
+        else{
+            if(root.left==null && root.right==null){
+                return null; 
+            }
+            else if(root.left==null){
+                return root.right; 
+            }
+            else if(root.right==null){
+                return root.left; 
+            }
+            else{
+                Node t=root.right;
+                while(t.left!=null){
+                    t=t.left;
+                }
+                root.data=t.data;
+                root.right=delete(root.right,t.data);
+            }
+        }
+        return root;
+    }
+    void delete(int data){
+        root=delete(root,data);
+    }
+    void printTree(Node root){
+        if(root==null){
+            return;
+        }
+        StringBuilder sb=new StringBuilder();
+        sb.append(root.data).append(":");
+        if(root.left!=null){
+            sb.append("L:").append(root.left.data).append(",");
+        }
+        if(root.right!=null){
+            sb.append("R:").append(root.right.data);
+        }
+        System.out.println(sb.toString());
+        printTree(root.left);
+        printTree(root.right);
+    }
+    void printTree(){
+        printTree(root);
+    }
+}
+public class Solution {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        int q=sc.nextInt();
+        BST tree=new BST();
+        while(q-->0){
+            int type=sc.nextInt();
+            switch(type){
+                case 1: 
+                    int valInsert=sc.nextInt();
+                    tree.insert(valInsert);
+                    break;
+                case 2: 
+                    int valDelete=sc.nextInt();
+                    tree.delete(valDelete);
+                    break;
+                case 3: 
+                    int valSearch=sc.nextInt();
+                    System.out.println(tree.search(valSearch));
+                    break;
+                case 4: 
+                    tree.printTree();
+                    break;
+            }
+        }
+    }
+}
