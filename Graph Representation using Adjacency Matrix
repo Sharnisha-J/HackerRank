@@ -1,0 +1,37 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        int v=sc.nextInt();
+        int e=sc.nextInt();
+        String dir=sc.next();
+        int mat[][]=new int[v][v];
+        if(dir.equalsIgnoreCase("yes")){
+            for(int i=0;i<e;i++){
+                int sv=sc.nextInt();
+                int ev=sc.nextInt();
+                int w=sc.nextInt();
+                mat[sv][ev]=w;
+            }
+        }
+        else{
+            for(int i=0;i<e;i++){
+                int sv=sc.nextInt();
+                int ev=sc.nextInt();
+                int w=sc.nextInt();
+                mat[sv][ev]=w;
+                mat[ev][sv]=w;
+            }
+        }
+        for(int i=0;i<mat.length;i++){
+            for(int j=0;j<mat[0].length;j++){
+                System.out.print(mat[i][j]+" ");
+            }
+            System.out.println();
+        }
+    }
+}
