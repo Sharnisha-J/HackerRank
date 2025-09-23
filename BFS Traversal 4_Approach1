@@ -1,0 +1,32 @@
+import java.util.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        int v=sc.nextInt();
+        int e=sc.nextInt();
+        int mat[][]=new int[v][v];
+        for(int i=0;i<e;i++){
+            int sv=sc.nextInt();
+            int ev=sc.nextInt();
+            mat[sv][ev]=1;
+            mat[ev][sv]=1;
+        }
+        Queue<Integer> queue=new LinkedList<>();
+        queue.add(0);
+        boolean vis[]=new boolean[v];
+        vis[0]=true;
+        while(!queue.isEmpty()){
+            int temp=queue.poll();
+            System.out.print(temp+" ");
+            for(int i=0;i<v;i++){
+                if(mat[temp][i]==1 && !vis[i]){
+                    queue.add(i);
+                    vis[i]=true;
+                }
+            }
+        }
+    }
+}
