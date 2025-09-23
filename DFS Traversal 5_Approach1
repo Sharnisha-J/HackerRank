@@ -1,0 +1,29 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    static void display(int mat[][],int st,int v,boolean vis[]){
+        System.out.print(st+" ");
+        vis[st]=true;
+        for(int en=0;en<v;en++){
+            if(mat[st][en]!=0 && !vis[en]){
+                display(mat,en,v,vis);
+            }
+        }
+    }
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        int v=sc.nextInt();
+        int e=sc.nextInt();
+        int mat[][]=new int[v][v];
+        for(int i=0;i<e;i++){
+            int sv=sc.nextInt();
+            int ev=sc.nextInt();
+            mat[sv][ev]=1;
+            mat[ev][sv]=1;
+        }
+        boolean vis[]=new boolean[v];
+        display(mat,0,v,vis);
+    }
+}
