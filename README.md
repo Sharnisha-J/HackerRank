@@ -1,2 +1,2 @@
 # HackerRank
-Problem Solving
+Contest
