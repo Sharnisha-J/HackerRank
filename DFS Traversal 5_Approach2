@@ -1,0 +1,32 @@
+import java.io.*;
+import java.util.*;
+
+public class Solution {
+    static void display(ArrayList<ArrayList<Integer>> list,int st,boolean vis[]){
+        System.out.print(st+" ");
+        vis[st]=true;
+        for(int en=0;en<list.get(st).size();en++){
+            if(!vis[list.get(st).get(en)]){
+                display(list,list.get(st).get(en),vis);
+            }
+        }
+    }
+    public static void main(String[] args) {
+        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
+        Scanner sc=new Scanner(System.in);
+        int v=sc.nextInt();
+        int e=sc.nextInt();
+        ArrayList<ArrayList<Integer>> list=new ArrayList<>();
+        for(int i=0;i<v;i++){
+            list.add(new ArrayList<>());
+        }
+        for(int i=0;i<e;i++){
+            int sv=sc.nextInt();
+            int ev=sc.nextInt();
+            list.get(sv).add(ev);
+            list.get(ev).add(sv);
+        }
+        boolean vis[]=new boolean[v];
+        display(list,0,vis);
+    }
+}
